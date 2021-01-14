@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/botonVizcaya"
+        android:layout_width="135dp"
+        android:layout_height="70dp"
+        android:text="Vizcaya"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/botonGuipuzkoa"
+        android:layout_width="135dp"
+        android:layout_height="70dp"
+        android:text="Guipuzkoa"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/botonAraba"
+        app:layout_constraintStart_toEndOf="@+id/botonVizcaya" />
+
+    <Button
+        android:id="@+id/botonAraba"
+        android:layout_width="135dp"
+        android:layout_height="70dp"
+        android:text="araba"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewEspaciosNaturales"
+        android:layout_width="405dp"
+        android:layout_height="667dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
