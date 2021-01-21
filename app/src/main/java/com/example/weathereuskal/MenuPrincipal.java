@@ -8,15 +8,14 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
-import com.example.weathereuskal.Ventanas.Comunidad;
 import com.example.weathereuskal.Ventanas.EspaciosNaturales;
 import com.example.weathereuskal.Ventanas.Top;
-import com.google.android.gms.maps.GoogleMap;
 
 public class MenuPrincipal extends AppCompatActivity implements View.OnClickListener {
     private Button botonEspacios;
     private Button botonComunidad;
     private Button botonTop;
+    private Button botonFotos;
 
 
     @Override
@@ -26,12 +25,13 @@ public class MenuPrincipal extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_menu_principal);
 
         botonEspacios = findViewById(R.id.botonEspaciosNaturales);
-        botonComunidad = findViewById(R.id.botonComunidad);
+        botonComunidad = findViewById(R.id.botonMunicipios);
         botonTop = findViewById(R.id.botonTop);
-
+        botonFotos = findViewById(R.id.botonFotos);
 
         botonEspacios.setOnClickListener(this);
         botonComunidad.setOnClickListener(this);
+        botonTop.setOnClickListener(this);
         botonTop.setOnClickListener(this);
 
     }
@@ -43,21 +43,23 @@ public class MenuPrincipal extends AppCompatActivity implements View.OnClickList
             case R.id.botonEspaciosNaturales:
                 Intent espaciosNaturales = new Intent(MenuPrincipal.this,EspaciosNaturales.class);
                 startActivity(espaciosNaturales);
-                finish();
                 break;
 
-            case R.id.botonComunidad:
-                Intent comunidad = new Intent(MenuPrincipal.this, Comunidad.class);
-                startActivity(comunidad);
-                finish();
+            case R.id.botonMunicipios:
+                Intent municipios = new Intent(MenuPrincipal.this, MunicipiosActivity.class);
+                startActivity(municipios);
                 break;
 
             case R.id.botonTop:
                 Intent top = new Intent(MenuPrincipal.this, Top.class);
                 startActivity(top);
-                finish();
                 break;
 
+            case R.id.botonFotos:
+
+                Intent fotos = new Intent(MenuPrincipal.this, Fotos.class);
+                startActivity(fotos);
+                break;
 
         }
     }

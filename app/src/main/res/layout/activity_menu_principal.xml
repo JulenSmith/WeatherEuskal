@@ -15,10 +15,10 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/botonComunidad"
+        android:id="@+id/botonMunicipios"
         android:layout_width="135dp"
         android:layout_height="70dp"
-        android:text="Comunidad"
+        android:text="Municipios"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -28,7 +28,28 @@
         android:layout_height="70dp"
         android:text="Top"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/botonComunidad"
+        app:layout_constraintEnd_toStartOf="@+id/botonMunicipios"
         app:layout_constraintStart_toEndOf="@+id/botonEspaciosNaturales" />
+
+    <Button
+        android:id="@+id/botonFotos"
+        android:layout_width="135dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="100dp"
+        android:onClick="onClick"
+        android:text="Fotos"
+        app:layout_constraintBottom_toTopOf="@+id/botonMunicipios"
+        app:layout_constraintEnd_toEndOf="@+id/botonMunicipios"
+        app:layout_constraintStart_toStartOf="@+id/botonMunicipios" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Favoritos"
+        app:layout_constraintBottom_toBottomOf="@+id/botonFotos"
+        app:layout_constraintEnd_toEndOf="@+id/botonEspaciosNaturales"
+        app:layout_constraintStart_toStartOf="@+id/botonEspaciosNaturales"
+        app:layout_constraintTop_toTopOf="@+id/botonFotos" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

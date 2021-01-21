@@ -53,7 +53,7 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
                 if(campoContrasena.getText().toString().equals(campoContrasenaRepetir.getText().toString())) {
                     ConexionBD clientThread = new ConexionBD();
                     clientThread.setConsulta("insert");
-                    clientThread.setSentencia("INSERT INTO usuario(nombre,contrasena) VALUES ('" + campoUsuario.getText().toString() + "','" + Hash.crearHash(campoContrasena.getText().toString()) + "')");
+                    clientThread.setSentencia("INSERT INTO usuario (nombre, contrasena, pregunta, respuesta) VALUES ('" + campoUsuario.getText().toString() + "','" + Hash.crearHash(campoContrasena.getText().toString()) + "','no','no');");
                     Thread thread = new Thread(clientThread);
                     thread.start();
 

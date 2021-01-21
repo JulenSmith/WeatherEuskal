@@ -1,6 +1,9 @@
 package com.example.weathereuskal.Conexion;
 
 import android.util.Log;
+
+import com.example.weathereuskal.Objetos.Municipio;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,6 +19,8 @@ public class ConexionBD implements Runnable {
     private String columna;
     private ArrayList<String> arrayResultados;
     private String result = null;
+    private ArrayList <String> lista;
+    private ArrayList <Municipio> listaMunicipios;
 
     public ConexionBD() {
 
@@ -46,7 +51,7 @@ public class ConexionBD implements Runnable {
 
             Class.forName("com.mysql.jdbc.Driver");
             //Aqui pondriamos la IP y puerto.
-            sIP = "192.168.0.11";
+            sIP = "192.168.56.1";
             sPuerto = "3306";
             sBBDD = "euskalmet";
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
@@ -86,6 +91,42 @@ public class ConexionBD implements Runnable {
                     st.execute(sqlSinRetorno);
 
                     break;
+
+                case "arraySelect":
+
+                    arrayResultados = new ArrayList <String>();
+
+                    st = con.prepareStatement(sentencia);
+                    rs = st.executeQuery();
+                    //--
+
+                    while (rs.next()) {
+
+                        arrayResultados.add(rs.getString(columna));
+
+                    }
+
+                    break;
+
+                case "selectArrayMunicipios":
+
+                    listaMunicipios = new ArrayList<Municipio>();
+
+                    st = con.prepareStatement(sentencia);
+                    rs = st.executeQuery();
+                    //--
+
+                    while (rs.next()) {
+                        Municipio municipio = new Municipio();
+                        municipio.setNombre(rs.getString(2));
+                        municipio.setDescripcion(rs.getString(4));
+                        municipio.setLatitud(rs.getDouble(5));
+                        municipio.setLongitud(rs.getDouble(6));
+                      listaMunicipios.add(municipio);
+                    }
+
+                    break;
+
             }
 
         } catch (ClassNotFoundException e) {
@@ -153,6 +194,10 @@ public class ConexionBD implements Runnable {
 
     public void setArrayResultados(ArrayList<String> arrayResultados) {
         this.arrayResultados = arrayResultados;
+    }
+
+    public ArrayList<Municipio> getListaMunicipios() {
+        return listaMunicipios;
     }
 }
 
