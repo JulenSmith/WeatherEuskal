@@ -1,9 +1,11 @@
 package com.example.weathereuskal.Conexion;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.example.weathereuskal.Objetos.EspacioNatural;
+import com.example.weathereuskal.Objetos.Foto;
 import com.example.weathereuskal.Objetos.Horario;
 import com.example.weathereuskal.Objetos.Municipio;
 
@@ -30,7 +32,7 @@ public class ConexionBD implements Runnable {
     private ArrayList <EspacioNatural> listaEspacios;
     private ArrayList <Horario> listaHorarios;
     private File foto;
-    private ArrayList <Blob> listaImagenes;
+    private ArrayList <Foto> listaImagenes;
 
     public ConexionBD() {
 
@@ -190,16 +192,27 @@ public class ConexionBD implements Runnable {
 
                 case "selectFotos":
 
-                   listaImagenes = new ArrayList <Blob>();
+                   listaImagenes = new ArrayList <Foto>();
 
                     st = con.prepareStatement(sentencia);
                     rs = st.executeQuery();
                     //--
 
                     while (rs.next()) {
+                        Foto foto = new Foto();
+                        Bitmap fotoBitmap;
+                        Blob fotoBlob;
 
-                        listaImagenes.add(rs.getBlob(1));
+                        foto.setNombreUsuario(rs.getString(1));
+                        fotoBlob = rs.getBlob(2);
 
+                        int blobLength = 0;
+                        blobLength = (int) fotoBlob.length();
+                        byte[] blobAsBytes = fotoBlob.getBytes(1, blobLength);
+                        fotoBitmap = BitmapFactory.decodeByteArray(blobAsBytes, 0 ,blobAsBytes.length);
+
+                        foto.setFoto(fotoBitmap);
+                        listaImagenes.add(foto);
                     }
 
                     break;
@@ -289,11 +302,11 @@ public class ConexionBD implements Runnable {
         this.foto = foto;
     }
 
-    public ArrayList<Blob> getListaImagenes() {
+    public ArrayList<Foto> getListaImagenes() {
         return listaImagenes;
     }
 
-    public void setListaImagenes(ArrayList<Blob> listaImagenes) {
+    public void setListaImagenes(ArrayList<Foto> listaImagenes) {
         this.listaImagenes = listaImagenes;
     }
 }

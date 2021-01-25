@@ -5,20 +5,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.weathereuskal.Objetos.Foto;
 import com.example.weathereuskal.R;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class AdapterGaleria extends RecyclerView.Adapter <AdapterGaleria.ViewHolder> implements View.OnClickListener {
 
-    ArrayList<Bitmap> listaFotos;
+    ArrayList<Foto> listaFotos;
     private View.OnClickListener listener;
 
-    public AdapterGaleria(ArrayList<Bitmap> listaFotos) {
+    public AdapterGaleria(ArrayList<Foto> listaFotos) {
         this.listaFotos = listaFotos;
     }
 
@@ -57,16 +61,19 @@ public class AdapterGaleria extends RecyclerView.Adapter <AdapterGaleria.ViewHol
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView fotoGaleria;
+        TextView autorGaleria;
 
         public ViewHolder(@NonNull View view) {
             super(view);
             fotoGaleria = view.findViewById(R.id.imageViewFotoGaleria);
+            autorGaleria = view.findViewById(R.id.textViewAutor);
 
         }
 
-        public void asignarDatos(Bitmap foto) {
+        public void asignarDatos(Foto foto) {
 
-            fotoGaleria.setImageBitmap(foto);
+            fotoGaleria.setImageBitmap(foto.getFoto());
+            autorGaleria.setText(foto.getNombreUsuario());
         }
     }
 
