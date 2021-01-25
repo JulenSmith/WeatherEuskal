@@ -3,9 +3,11 @@ package com.example.weathereuskal.Objetos;
 public class EspacioNatural {
 
     private String nombre;
-    private String calidad;
-    private String municipio;
-
+    private String descripcion;
+    private String tipo;
+    private String territorio;
+    private Double latitud;
+    private Double longitud;
 
     public EspacioNatural() {
     }
@@ -18,19 +20,44 @@ public class EspacioNatural {
         this.nombre = nombre;
     }
 
-    public String getCalidad() {
-        return calidad;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setCalidad(String calidad) {
-        this.calidad = calidad;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public String getMunicipio() {
-        return municipio;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setMunicipio(String municipio) {
-        this.municipio = municipio;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
+
+    public String getTerritorio() {
+        return territorio;
+    }
+
+    public void setTerritorio(String territorio) {
+        this.territorio = territorio;
+    }
+
+    public Double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
+    }
+
+    public Double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
+    }
+
 }

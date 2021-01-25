@@ -1,9 +1,15 @@
 package com.example.weathereuskal.Conexion;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
+import com.example.weathereuskal.Objetos.EspacioNatural;
+import com.example.weathereuskal.Objetos.Horario;
 import com.example.weathereuskal.Objetos.Municipio;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,6 +27,10 @@ public class ConexionBD implements Runnable {
     private String result = null;
     private ArrayList <String> lista;
     private ArrayList <Municipio> listaMunicipios;
+    private ArrayList <EspacioNatural> listaEspacios;
+    private ArrayList <Horario> listaHorarios;
+    private File foto;
+    private ArrayList <Blob> listaImagenes;
 
     public ConexionBD() {
 
@@ -102,7 +112,7 @@ public class ConexionBD implements Runnable {
 
                     while (rs.next()) {
 
-                        arrayResultados.add(rs.getString(columna));
+                        arrayResultados.add(rs.getString(1));
 
                     }
 
@@ -123,6 +133,73 @@ public class ConexionBD implements Runnable {
                         municipio.setLatitud(rs.getDouble(5));
                         municipio.setLongitud(rs.getDouble(6));
                       listaMunicipios.add(municipio);
+                    }
+
+                    break;
+
+                case "selectArrayEspacios":
+
+                    listaEspacios = new ArrayList<EspacioNatural>();
+                    st = con.prepareStatement(sentencia);
+                    rs = st.executeQuery();
+                    //--
+
+                    while (rs.next()) {
+                        EspacioNatural espacio = new EspacioNatural();
+                        espacio.setNombre(rs.getString(2));
+                        espacio.setDescripcion(rs.getString(3));
+                        espacio.setTipo(rs.getString(4));
+                        espacio.setTerritorio(rs.getString(5));
+                        espacio.setLatitud(rs.getDouble(6));
+                        espacio.setLongitud(rs.getDouble(7));
+                        listaEspacios.add(espacio);
+                    }
+
+                    break;
+
+                case "selectArrayHorarios":
+
+                    listaHorarios = new ArrayList<Horario>();
+                    st = con.prepareStatement(sentencia);
+                    rs = st.executeQuery();
+
+                    while (rs.next()) {
+                        Horario horario = new Horario();
+                        horario.setFecha(rs.getString(1));
+                        horario.setHora(rs.getString(2));
+                        horario.setNogm3(rs.getString(3));
+                        horario.setNo2(rs.getString(4));
+                        horario.setNoxgm3(rs.getString(5));
+                        horario.setPm10(rs.getString(6));
+                        horario.setPm25(rs.getString(7));
+                        horario.setSo2(rs.getString(8));
+                        horario.setIca(rs.getString(9));
+                        listaHorarios.add(horario);
+                    }
+
+                    break;
+
+                case "insertFoto":
+
+                    FileInputStream convertir_imagen = new FileInputStream (foto);
+                    st = con.prepareStatement(sentencia);
+                    st.setBlob(1, convertir_imagen, foto.length());
+                    st.executeUpdate();
+
+                    break;
+
+                case "selectFotos":
+
+                   listaImagenes = new ArrayList <Blob>();
+
+                    st = con.prepareStatement(sentencia);
+                    rs = st.executeQuery();
+                    //--
+
+                    while (rs.next()) {
+
+                        listaImagenes.add(rs.getBlob(1));
+
                     }
 
                     break;
@@ -198,6 +275,26 @@ public class ConexionBD implements Runnable {
 
     public ArrayList<Municipio> getListaMunicipios() {
         return listaMunicipios;
+    }
+
+    public ArrayList<EspacioNatural> getListaEspacios() {
+        return listaEspacios;
+    }
+
+    public ArrayList<Horario> getListaHorarios() {
+        return listaHorarios;
+    }
+
+    public void setFoto(File foto) {
+        this.foto = foto;
+    }
+
+    public ArrayList<Blob> getListaImagenes() {
+        return listaImagenes;
+    }
+
+    public void setListaImagenes(ArrayList<Blob> listaImagenes) {
+        this.listaImagenes = listaImagenes;
     }
 }
 

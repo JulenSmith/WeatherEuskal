@@ -10,7 +10,7 @@ import com.example.weathereuskal.Conexion.ConexionBD;
 import com.example.weathereuskal.Objetos.Provincia;
 import com.example.weathereuskal.R;
 import com.example.weathereuskal.Utilidades.AdapterSimple;
-import com.example.weathereuskal.Utilidades.RecyclerAdapter;
+
 
 import java.util.ArrayList;
 
@@ -39,10 +39,8 @@ public class Comunidad extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
         AdapterSimple aS = new AdapterSimple(clientThread.getArrayResultados());
         recycler.setAdapter(aS);
 
-        Toast.makeText(this, clientThread.getArrayResultados().get(0), Toast.LENGTH_SHORT).show();
     }
 }

@@ -67,6 +67,8 @@ public class IniciarSesion extends AppCompatActivity implements View.OnClickList
         botonRegistrarse = findViewById(R.id.botonRegistroIS);
         campoUsuario = findViewById(R.id.texNombreUsuarioIS);
         campoContrasena = findViewById(R.id.textContrasenaIS);
+        campoUsuario.setText("test");
+        campoContrasena.setText("test");
 
         botonLogin.setOnClickListener(this);
         botonRegistrarse.setOnClickListener(this);
@@ -160,8 +162,10 @@ public class IniciarSesion extends AppCompatActivity implements View.OnClickList
                 if(contraBD.equals(contrasenahasheada) && nombreBD.equals(campoUsuario.getText().toString())) {
 
                     Intent i = new Intent(IniciarSesion.this, MenuPrincipal.class);
+                    Bundle extras = new Bundle();
+                    extras.putString("nombreUsuario", nombreBD);
+                    i.putExtras(extras);
                     startActivity(i);
-                    finish();
                 }else{
                     Toast.makeText(this, "Los campos no están correctos", Toast.LENGTH_SHORT).show();
                 }
