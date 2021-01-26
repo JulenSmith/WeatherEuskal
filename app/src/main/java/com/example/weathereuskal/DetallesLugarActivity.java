@@ -28,6 +28,7 @@ public class DetallesLugarActivity extends AppCompatActivity implements View.OnC
     private ListView listview;
     private ListView listaCalidad;
     private Spinner spinner;
+    private ListView listaNoxgm3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class DetallesLugarActivity extends AppCompatActivity implements View.OnC
         listview = this.findViewById(R.id.list1);
         listaCalidad = this.findViewById(R.id.listCalidad);
         spinner = this.findViewById(R.id.spinnerEstaciones);
+        listaNoxgm3 = this.findViewById(R.id.listNoxgm3);
 
         nombreLugar.setText(getIntent().getExtras().getString("nombre"));
 
@@ -102,6 +104,7 @@ public class DetallesLugarActivity extends AppCompatActivity implements View.OnC
             ArrayList<Horario> listaHorarios = conexionHorarios.getListaHorarios();
             ArrayList<String> horas = new ArrayList<String>();
             ArrayList<String> calidad = new ArrayList<String>();
+            ArrayList<String> noxgm3 = new ArrayList<String>();
 
             if (listaHorarios.size() > 0) {
 
@@ -109,6 +112,15 @@ public class DetallesLugarActivity extends AppCompatActivity implements View.OnC
 
                     horas.add(listaHorarios.get(i).getHora());
                     calidad.add(listaHorarios.get(i).getIca());
+
+                    if (listaHorarios.get(i).getNoxgm3() != null){
+
+                        noxgm3.add(listaHorarios.get(i).getNoxgm3());
+                    } else {
+
+                        noxgm3.add("No disponible");
+                    }
+
 
                 }
 
@@ -118,8 +130,12 @@ public class DetallesLugarActivity extends AppCompatActivity implements View.OnC
                 ArrayAdapter<String> adapterCalidad = new ArrayAdapter<String>
                         (this, android.R.layout.simple_list_item_1, calidad);
 
+                ArrayAdapter<String> adapterNoxgm3 = new ArrayAdapter<String>
+                        (this, android.R.layout.simple_list_item_1, noxgm3);
+
                 listview.setAdapter(adapterHora);
                 listaCalidad.setAdapter(adapterCalidad);
+                listaNoxgm3.setAdapter(adapterNoxgm3);
 
             } else {
 

@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MunicipiosActivity">
 
+    <ImageView
+        android:id="@+id/imageViewFondo"
+        android:layout_width="409dp"
+        android:layout_height="679dp"
+        android:background="#FFFFFF"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/botonBizkaia"
         android:layout_width="135dp"

@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".MenuPrincipal">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/fondo_principal" />
+
     <Button
         android:id="@+id/botonEspaciosNaturales"
         android:layout_width="135dp"
@@ -52,5 +66,19 @@
         app:layout_constraintEnd_toEndOf="@+id/botonEspaciosNaturales"
         app:layout_constraintStart_toStartOf="@+id/botonEspaciosNaturales"
         app:layout_constraintTop_toTopOf="@+id/botonFotos" />
+
+    <TextView
+        android:id="@+id/textViewBienvenida"
+        android:layout_width="361dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:text="Hola"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

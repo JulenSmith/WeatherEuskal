@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 import com.example.weathereuskal.Ventanas.Top;
@@ -20,6 +21,7 @@ public class MenuPrincipal extends AppCompatActivity implements View.OnClickList
     private Button botonTop;
     private Button botonFotos;
     private Button botonFavoritos;
+    private TextView textBienvenida;
 
 
     @Override
@@ -34,11 +36,14 @@ public class MenuPrincipal extends AppCompatActivity implements View.OnClickList
         botonTop = findViewById(R.id.botonTop);
         botonFotos = findViewById(R.id.botonFotos);
         botonFavoritos = findViewById(R.id.botonFavoritos);
+        textBienvenida = findViewById(R.id.textViewBienvenida);
 
         botonEspacios.setOnClickListener(this);
         botonComunidad.setOnClickListener(this);
         botonTop.setOnClickListener(this);
         botonFavoritos.setOnClickListener(this);
+
+        textBienvenida.setText("Hola, " + getIntent().getExtras().getString("nombreUsuario"));
 
         if (!getApplication().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)){
 
