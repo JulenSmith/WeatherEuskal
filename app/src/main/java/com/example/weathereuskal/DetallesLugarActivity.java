@@ -29,6 +29,7 @@ public class DetallesLugarActivity extends AppCompatActivity implements View.OnC
     private ListView listaCalidad;
     private Spinner spinner;
     private ListView listaNoxgm3;
+    private Button buttonFotos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class DetallesLugarActivity extends AppCompatActivity implements View.OnC
         listaCalidad = this.findViewById(R.id.listCalidad);
         spinner = this.findViewById(R.id.spinnerEstaciones);
         listaNoxgm3 = this.findViewById(R.id.listNoxgm3);
+        buttonFotos = this.findViewById(R.id.buttonFotos);
 
         nombreLugar.setText(getIntent().getExtras().getString("nombre"));
 
@@ -224,12 +226,14 @@ public class DetallesLugarActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v){
 
+        Bundle extras = new Bundle();
+
         switch (v.getId()){
 
             case R.id.botonLocalizacion:
 
                 Intent localizacion = new Intent(DetallesLugarActivity.this, MapaActivity.class);
-                Bundle extras = new Bundle();
+                extras = new Bundle();
                 extras.putString("nombre", getIntent().getExtras().getString("nombre"));
                 extras.putDouble("latitud", getIntent().getExtras().getDouble("latitud"));
                 extras.putDouble("longitud", getIntent().getExtras().getDouble("longitud"));
@@ -270,6 +274,13 @@ public class DetallesLugarActivity extends AppCompatActivity implements View.OnC
                     e.printStackTrace();
                 }
 
+                break;
+
+            case R.id.buttonFotos:
+
+                Intent fotos = new Intent (DetallesLugarActivity.this, Fotos.class);
+                extras = new Bundle();
+                break;
 
         }
 
