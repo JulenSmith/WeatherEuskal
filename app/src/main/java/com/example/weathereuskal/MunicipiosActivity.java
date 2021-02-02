@@ -121,7 +121,7 @@ public class MunicipiosActivity extends AppCompatActivity {
                     Intent municipio = new Intent(MunicipiosActivity.this, DetallesLugarActivity.class);
 
                     Bundle extras = new Bundle();
-                    extras.putString("botonOrigen", "entornos");
+                    extras.putString("botonOrigen", getIntent().getExtras().getString("botonOrigen"));
                     extras.putString("nombreUsuario", getIntent().getExtras().getString("nombreUsuario"));
                     extras.putString("nombre", listaEspacios.get(recycler.getChildAdapterPosition(v)).getNombre());
                     extras.putString("descripcion", listaEspacios.get(recycler.getChildAdapterPosition(v)).getDescripcion());

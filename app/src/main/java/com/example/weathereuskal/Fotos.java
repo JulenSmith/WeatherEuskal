@@ -91,32 +91,85 @@ public class Fotos extends AppCompatActivity implements View.OnClickListener {
 
                 }
 
-
-
                 break;
 
             case R.id.botonSubir:
 
-                ConexionBD clientThread = new ConexionBD();
-                clientThread.setConsulta("insertFoto");
-                clientThread.setSentencia("Insert into fotos (Usuario, Foto) VALUES ((SELECT Id from usuario where Nombre = '" + getIntent().getExtras().getString("nombreUsuario") + "'), ?)");
-                Log.e("Mensaje", getIntent().getExtras().getString("nombreUsuario"));
-                boolean subida = true;
-                try {
-                    clientThread.setFoto(imagen);
-                    Thread thread = new Thread(clientThread);
-                    thread.start();
-                    thread.join(); // Esperar respusta del servidor...
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    subida = false;
-                }
+                if (getIntent().getExtras().getString("botonOrigen").equals("municipios")){
 
-                if (subida){
+                    ConexionBD clientThread = new ConexionBD();
+                    clientThread.setConsulta("insertFoto");
+                    clientThread.setSentencia("Insert into fotosmunicipios (Usuario, Municipio, Foto) " +
+                            "VALUES ((SELECT Id from usuario where Nombre = '" + getIntent().getExtras().getString("nombreUsuario") + "'), " +
+                            "(SELECT Id from municipios where Nombre = '" + getIntent().getExtras().getString("nombreLugar") + "'), " +
+                            "?)");
+                    boolean subida = true;
+                    try {
+                        clientThread.setFoto(imagen);
+                        Thread thread = new Thread(clientThread);
+                        thread.start();
+                        thread.join(); // Esperar respusta del servidor...
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        subida = false;
+                    }
 
-                    Toast.makeText(this, "La foto ha sido subida",Toast.LENGTH_SHORT).show();
-                    botonSubirFoto.setEnabled(false);
+                    if (subida) {
 
+                        Toast.makeText(this, "La foto ha sido subida", Toast.LENGTH_SHORT).show();
+                        botonSubirFoto.setEnabled(false);
+
+                    }
+
+                } else if (getIntent().getExtras().getString("botonOrigen").equals("espacios")){
+
+                    ConexionBD clientThread = new ConexionBD();
+                    clientThread.setConsulta("insertFoto");
+                    clientThread.setSentencia("Insert into fotosentornos (Usuario, Entorno, Foto) " +
+                            "VALUES ((SELECT Id from usuario where Nombre = '" + getIntent().getExtras().getString("nombreUsuario") + "'), " +
+                            "(SELECT Id from entornos where Nombre = '" + getIntent().getExtras().getString("nombreLugar") + "'), " +
+                            "?)");
+                    boolean subida = true;
+                    try {
+                        clientThread.setFoto(imagen);
+                        Thread thread = new Thread(clientThread);
+                        thread.start();
+                        thread.join(); // Esperar respusta del servidor...
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        subida = false;
+                    }
+
+                    if (subida) {
+
+                        Toast.makeText(this, "La foto ha sido subida", Toast.LENGTH_SHORT).show();
+                        botonSubirFoto.setEnabled(false);
+
+                    }
+
+                } else {
+
+                    ConexionBD clientThread = new ConexionBD();
+                    clientThread.setConsulta("insertFoto");
+                    clientThread.setSentencia("Insert into fotos (Usuario, Foto) VALUES ((SELECT Id from usuario where Nombre = '" + getIntent().getExtras().getString("nombreUsuario") + "'), ?)");
+                    Log.e("Mensaje", getIntent().getExtras().getString("nombreUsuario"));
+                    boolean subida = true;
+                    try {
+                        clientThread.setFoto(imagen);
+                        Thread thread = new Thread(clientThread);
+                        thread.start();
+                        thread.join(); // Esperar respusta del servidor...
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        subida = false;
+                    }
+
+                    if (subida) {
+
+                        Toast.makeText(this, "La foto ha sido subida", Toast.LENGTH_SHORT).show();
+                        botonSubirFoto.setEnabled(false);
+
+                    }
                 }
 
                 break;
@@ -124,6 +177,10 @@ public class Fotos extends AppCompatActivity implements View.OnClickListener {
             case R.id.botonGaleria:
 
                 Intent galeria = new Intent(Fotos.this,GaleriaActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString("botonOrigen", getIntent().getExtras().getString("botonOrigen"));
+                extras.putString("nombreLugar", getIntent().getExtras().getString("nombreLugar"));
+                galeria.putExtras(extras);
                 startActivity(galeria);
 
                     break;

@@ -280,10 +280,15 @@ public class DetallesLugarActivity extends AppCompatActivity implements View.OnC
 
                 break;
 
-            case R.id.buttonFotos:
+            case R.id.buttonFotos :
 
                 Intent fotos = new Intent (DetallesLugarActivity.this, Fotos.class);
                 extras = new Bundle();
+                extras.putString("botonOrigen", getIntent().getExtras().getString("botonOrigen"));
+                extras.putString("nombreUsuario", getIntent().getExtras().getString("nombreUsuario"));
+                extras.putString("nombreLugar", nombreLugar.getText().toString());
+                fotos.putExtras(extras);
+                startActivity(fotos);
                 break;
 
         }

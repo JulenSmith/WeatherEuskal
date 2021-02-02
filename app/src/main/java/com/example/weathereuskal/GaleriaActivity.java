@@ -40,7 +40,24 @@ public class GaleriaActivity extends AppCompatActivity {
 
         ConexionBD clientThread = new ConexionBD();
         clientThread.setConsulta("selectFotos");
-        clientThread.setSentencia("SELECT Nombre, Foto from fotos INNER JOIN usuario on usuario.Id = fotos.Usuario order by fotos.Id desc");
+
+        if (getIntent().getExtras().getString("botonOrigen").equals("municipios")){
+
+            clientThread.setSentencia("SELECT Nombre, Foto from fotosmunicipios INNER JOIN usuario on usuario.Id = fotosmunicipios.Usuario " +
+                    "where municipio = (SELECT Id from municipios where Nombre = '" + getIntent().getExtras().getString("nombreLugar") +"')" +
+                    " order by fotosmunicipios.Id desc");
+
+        } else if (getIntent().getExtras().getString("botonOrigen").equals("espacios")){
+
+            clientThread.setSentencia("SELECT Nombre, Foto from fotosentornos INNER JOIN usuario on usuario.Id = fotosentornos.Usuario " +
+                    "where entorno = (SELECT Id from entornos where Nombre = '" + getIntent().getExtras().getString("nombreLugar") +"')" +
+                    " order by fotosentornos.Id desc");
+
+        } else {
+
+            clientThread.setSentencia("SELECT Nombre, Foto from fotos INNER JOIN usuario on usuario.Id = fotos.Usuario order by fotos.Id desc");
+
+        }
 
         Thread thread = new Thread(clientThread);
         thread.start();

@@ -62,9 +62,9 @@ public class ConexionBD implements Runnable {
 
             Class.forName("com.mysql.jdbc.Driver");
             //Aqui pondriamos la IP y puerto.
-            //192.168.56.1
+            //"192.168.56.1"
 //            "192.168.7.227"
-            sIP = "192.168.1.137";
+            sIP = "192.168.56.1";
             sPuerto = "3306";
             sBBDD = "euskalmet";
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
@@ -183,6 +183,7 @@ public class ConexionBD implements Runnable {
                     st.executeUpdate();
 
                     break;
+
 
                 case "selectFotos":
 
