@@ -1,16 +1,20 @@
 package com.example.weathereuskal;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ShareCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ShareActionProvider;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -274,4 +278,17 @@ public class DetallesLugarActivity extends AppCompatActivity implements View.OnC
         }
 
     }
+
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.share, menu);
+//        MenuItem item = menu.findItem(R.id.share_item);
+//        actionProvider = (ShareActionProvider) item.getActionProvider();
+//
+//        // Create the share Intent
+//        String shareText = URL_TO_SHARE;
+//        Intent shareIntent = ShareCompat.IntentBuilder.from(this)
+//                .setType("text/plain").setText(shareText).getIntent();
+//        actionProvider.setShareIntent(shareIntent);
+//        return true;
+//    }
 }

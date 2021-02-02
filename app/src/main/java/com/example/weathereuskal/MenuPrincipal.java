@@ -96,7 +96,6 @@ public class MenuPrincipal extends AppCompatActivity implements View.OnClickList
                 favoritos.putExtras(extras);
                 startActivity(favoritos);
                 break;
-
         }
     }
 }
