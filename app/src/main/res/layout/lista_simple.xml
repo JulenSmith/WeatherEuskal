@@ -11,5 +11,11 @@
         android:layout_height="wrap_content"
         android:gravity="fill|fill_horizontal"
         android:text="mensaje"
-        android:textSize="36sp" />
+        android:textColor="#FFFFFF"
+        android:textSize="36sp"
+        android:shadowColor="#FF000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="15"
+        android:textAllCaps="true"/>
 </LinearLayout>

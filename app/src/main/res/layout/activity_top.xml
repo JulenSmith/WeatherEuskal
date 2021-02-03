@@ -6,4 +6,104 @@
     android:layout_height="match_parent"
     tools:context=".Ventanas.Top">
 
+    <TextView
+        android:id="@+id/top1"
+        android:layout_width="307dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="60dp"
+        android:text="top pos1"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/top5"
+        android:layout_width="301dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="40dp"
+        android:text="top pos5"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top4" />
+
+    <TextView
+        android:id="@+id/top3"
+        android:layout_width="306dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="40dp"
+        android:text="top pos3"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top2" />
+
+    <TextView
+        android:id="@+id/top2"
+        android:layout_width="306dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="40dp"
+        android:text="top pos2"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top1" />
+
+    <TextView
+        android:id="@+id/top4"
+        android:layout_width="305dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="40dp"
+        android:text="top pos4"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top3" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:text="Top datos filtrados por NoGm3"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/prov2"
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:text="Gipuzkoa"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/prov3"
+        app:layout_constraintStart_toEndOf="@+id/prov1"
+        app:layout_constraintTop_toBottomOf="@+id/top5"
+        app:layout_constraintVertical_bias="0.978" />
+
+    <Button
+        android:id="@+id/prov1"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:text="Bizkaia"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top5"
+        app:layout_constraintVertical_bias="0.978" />
+
+    <Button
+        android:id="@+id/prov3"
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:text="Araba"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top5"
+        app:layout_constraintVertical_bias="0.978" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

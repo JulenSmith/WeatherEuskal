@@ -1,16 +1,20 @@
 package com.example.weathereuskal;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ShareCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ShareActionProvider;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +32,8 @@ public class DetallesLugarActivity extends AppCompatActivity implements View.OnC
     private ListView listview;
     private ListView listaCalidad;
     private Spinner spinner;
+    private ListView listaNoxgm3;
+    private Button buttonFotos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,8 @@ public class DetallesLugarActivity extends AppCompatActivity implements View.OnC
         listview = this.findViewById(R.id.list1);
         listaCalidad = this.findViewById(R.id.listCalidad);
         spinner = this.findViewById(R.id.spinnerEstaciones);
+        listaNoxgm3 = this.findViewById(R.id.listNoxgm3);
+        buttonFotos = this.findViewById(R.id.buttonFotos);
 
         nombreLugar.setText(getIntent().getExtras().getString("nombre"));
 
@@ -102,6 +110,7 @@ public class DetallesLugarActivity extends AppCompatActivity implements View.OnC
             ArrayList<Horario> listaHorarios = conexionHorarios.getListaHorarios();
             ArrayList<String> horas = new ArrayList<String>();
             ArrayList<String> calidad = new ArrayList<String>();
+            ArrayList<String> noxgm3 = new ArrayList<String>();
 
             if (listaHorarios.size() > 0) {
 
@@ -109,6 +118,15 @@ public class DetallesLugarActivity extends AppCompatActivity implements View.OnC
 
                     horas.add(listaHorarios.get(i).getHora());
                     calidad.add(listaHorarios.get(i).getIca());
+
+                    if (listaHorarios.get(i).getNoxgm3() != null){
+
+                        noxgm3.add(listaHorarios.get(i).getNoxgm3());
+                    } else {
+
+                        noxgm3.add("No disponible");
+                    }
+
 
                 }
 
@@ -118,8 +136,12 @@ public class DetallesLugarActivity extends AppCompatActivity implements View.OnC
                 ArrayAdapter<String> adapterCalidad = new ArrayAdapter<String>
                         (this, android.R.layout.simple_list_item_1, calidad);
 
+                ArrayAdapter<String> adapterNoxgm3 = new ArrayAdapter<String>
+                        (this, android.R.layout.simple_list_item_1, noxgm3);
+
                 listview.setAdapter(adapterHora);
                 listaCalidad.setAdapter(adapterCalidad);
+                listaNoxgm3.setAdapter(adapterNoxgm3);
 
             } else {
 
@@ -208,12 +230,14 @@ public class DetallesLugarActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v){
 
+        Bundle extras = new Bundle();
+
         switch (v.getId()){
 
             case R.id.botonLocalizacion:
 
                 Intent localizacion = new Intent(DetallesLugarActivity.this, MapaActivity.class);
-                Bundle extras = new Bundle();
+                extras = new Bundle();
                 extras.putString("nombre", getIntent().getExtras().getString("nombre"));
                 extras.putDouble("latitud", getIntent().getExtras().getDouble("latitud"));
                 extras.putDouble("longitud", getIntent().getExtras().getDouble("longitud"));
@@ -254,8 +278,33 @@ public class DetallesLugarActivity extends AppCompatActivity implements View.OnC
                     e.printStackTrace();
                 }
 
+                break;
+
+            case R.id.buttonFotos :
+
+                Intent fotos = new Intent (DetallesLugarActivity.this, Fotos.class);
+                extras = new Bundle();
+                extras.putString("botonOrigen", getIntent().getExtras().getString("botonOrigen"));
+                extras.putString("nombreUsuario", getIntent().getExtras().getString("nombreUsuario"));
+                extras.putString("nombreLugar", nombreLugar.getText().toString());
+                fotos.putExtras(extras);
+                startActivity(fotos);
+                break;
 
         }
 
     }
+
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.share, menu);
+//        MenuItem item = menu.findItem(R.id.share_item);
+//        actionProvider = (ShareActionProvider) item.getActionProvider();
+//
+//        // Create the share Intent
+//        String shareText = URL_TO_SHARE;
+//        Intent shareIntent = ShareCompat.IntentBuilder.from(this)
+//                .setType("text/plain").setText(shareText).getIntent();
+//        actionProvider.setShareIntent(shareIntent);
+//        return true;
+//    }
 }

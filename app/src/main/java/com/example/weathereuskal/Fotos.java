@@ -3,6 +3,7 @@ package com.example.weathereuskal;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -26,6 +27,7 @@ import java.io.IOException;
 
 public class Fotos extends AppCompatActivity implements View.OnClickListener {
 
+    private static final int REQUEST_CAMERA = 1;
     private Button botonSacarFotos;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private String rutaImagen;
@@ -56,55 +58,118 @@ public class Fotos extends AppCompatActivity implements View.OnClickListener {
 
             case R.id.botonSacarFoto:
 
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-                    File imagenArchivo = null;
+                if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
 
-                    try {
+                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    if (getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+                        File imagenArchivo = null;
 
-                        imagenArchivo = crearImagen();
+                        try {
 
-                    }catch (IOException ex){
+                            imagenArchivo = crearImagen();
 
-                        Log.e("Error", ex.toString());
+                        }catch (IOException ex){
 
-                    }
+                            Log.e("Error", ex.toString());
 
-                    if(imagenArchivo != null){
+                        }
 
-                        Uri fotoUri = FileProvider.getUriForFile(this, "com.example.weathereuskal.fileprovider", imagenArchivo);
-                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fotoUri);
-                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                        if(imagenArchivo != null){
+
+                            Uri fotoUri = FileProvider.getUriForFile(this, "com.example.weathereuskal.fileprovider", imagenArchivo);
+                            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fotoUri);
+                            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                        }
+
+                    } else {
+                        Log.e("Mensaje", "Nulo");
                     }
 
                 } else {
-                    Log.e("Mensaje", "Nulo");
+
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
+
                 }
 
                 break;
 
             case R.id.botonSubir:
 
-                ConexionBD clientThread = new ConexionBD();
-                clientThread.setConsulta("insertFoto");
-                clientThread.setSentencia("Insert into fotos (Usuario, Foto) VALUES ((SELECT Id from usuario where Nombre = '" + getIntent().getExtras().getString("nombreUsuario") + "'), ?)");
-                Log.e("Mensaje", getIntent().getExtras().getString("nombreUsuario"));
-                boolean subida = true;
-                try {
-                    clientThread.setFoto(imagen);
-                    Thread thread = new Thread(clientThread);
-                    thread.start();
-                    thread.join(); // Esperar respusta del servidor...
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    subida = false;
-                }
+                if (getIntent().getExtras().getString("botonOrigen").equals("municipios")){
 
-                if (subida){
+                    ConexionBD clientThread = new ConexionBD();
+                    clientThread.setConsulta("insertFoto");
+                    clientThread.setSentencia("Insert into fotosmunicipios (Usuario, Municipio, Foto) " +
+                            "VALUES ((SELECT Id from usuario where Nombre = '" + getIntent().getExtras().getString("nombreUsuario") + "'), " +
+                            "(SELECT Id from municipios where Nombre = '" + getIntent().getExtras().getString("nombreLugar") + "'), " +
+                            "?)");
+                    boolean subida = true;
+                    try {
+                        clientThread.setFoto(imagen);
+                        Thread thread = new Thread(clientThread);
+                        thread.start();
+                        thread.join(); // Esperar respusta del servidor...
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        subida = false;
+                    }
 
-                    Toast.makeText(this, "La foto ha sido subida",Toast.LENGTH_SHORT).show();
-                    botonSubirFoto.setEnabled(false);
+                    if (subida) {
 
+                        Toast.makeText(this, "La foto ha sido subida", Toast.LENGTH_SHORT).show();
+                        botonSubirFoto.setEnabled(false);
+
+                    }
+
+                } else if (getIntent().getExtras().getString("botonOrigen").equals("espacios")){
+
+                    ConexionBD clientThread = new ConexionBD();
+                    clientThread.setConsulta("insertFoto");
+                    clientThread.setSentencia("Insert into fotosentornos (Usuario, Entorno, Foto) " +
+                            "VALUES ((SELECT Id from usuario where Nombre = '" + getIntent().getExtras().getString("nombreUsuario") + "'), " +
+                            "(SELECT Id from entornos where Nombre = '" + getIntent().getExtras().getString("nombreLugar") + "'), " +
+                            "?)");
+                    boolean subida = true;
+                    try {
+                        clientThread.setFoto(imagen);
+                        Thread thread = new Thread(clientThread);
+                        thread.start();
+                        thread.join(); // Esperar respusta del servidor...
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        subida = false;
+                    }
+
+                    if (subida) {
+
+                        Toast.makeText(this, "La foto ha sido subida", Toast.LENGTH_SHORT).show();
+                        botonSubirFoto.setEnabled(false);
+
+                    }
+
+                } else {
+
+                    ConexionBD clientThread = new ConexionBD();
+                    clientThread.setConsulta("insertFoto");
+                    clientThread.setSentencia("Insert into fotos (Usuario, Foto) VALUES ((SELECT Id from usuario where Nombre = '" + getIntent().getExtras().getString("nombreUsuario") + "'), ?)");
+                    Log.e("Mensaje", getIntent().getExtras().getString("nombreUsuario"));
+                    boolean subida = true;
+                    try {
+                        clientThread.setFoto(imagen);
+                        Thread thread = new Thread(clientThread);
+                        thread.start();
+                        thread.join(); // Esperar respusta del servidor...
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        subida = false;
+                    }
+
+                    if (subida) {
+
+                        Toast.makeText(this, "La foto ha sido subida", Toast.LENGTH_SHORT).show();
+                        botonSubirFoto.setEnabled(false);
+
+                    }
                 }
 
                 break;
@@ -112,6 +177,10 @@ public class Fotos extends AppCompatActivity implements View.OnClickListener {
             case R.id.botonGaleria:
 
                 Intent galeria = new Intent(Fotos.this,GaleriaActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString("botonOrigen", getIntent().getExtras().getString("botonOrigen"));
+                extras.putString("nombreLugar", getIntent().getExtras().getString("nombreLugar"));
+                galeria.putExtras(extras);
                 startActivity(galeria);
 
                     break;

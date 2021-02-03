@@ -3,6 +3,7 @@ package com.example.weathereuskal.Conexion;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.weathereuskal.Objetos.EspacioNatural;
 import com.example.weathereuskal.Objetos.Foto;
@@ -19,6 +20,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import kotlin.text.UStringsKt;
+
 public class ConexionBD implements Runnable {
 
     private String sResultado = null;
@@ -33,10 +36,9 @@ public class ConexionBD implements Runnable {
     private ArrayList <Horario> listaHorarios;
     private File foto;
     private ArrayList <Foto> listaImagenes;
+    private String[][] top;
 
-    public ConexionBD() {
-
-    }
+    public ConexionBD() {}
 
     public ConexionBD(String consulta) {
         this.consulta = consulta;
@@ -56,20 +58,17 @@ public class ConexionBD implements Runnable {
         String sIP;
         String sPuerto;
         String sBBDD;
-
-
-
         try{
 
             Class.forName("com.mysql.jdbc.Driver");
             //Aqui pondriamos la IP y puerto.
-            sIP = "192.168.0.11";
+            //"192.168.56.1"
+//            "192.168.7.227"
+            sIP = "192.168.56.1";
             sPuerto = "3306";
             sBBDD = "euskalmet";
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
             con = DriverManager.getConnection( url, "root", "");
-
-
 
             switch(consulta) {
                 case "select":
@@ -79,15 +78,12 @@ public class ConexionBD implements Runnable {
                     st = con.prepareStatement(sqlSelect);
                     rs = st.executeQuery();
                     //--
-
-
                     while (rs.next()) {
 
                         this.sResultado = rs.getString(columna);
 
                         result = sResultado;
                     }
-
 
                     Log.i("iniciarSesion", "dentroBD : "+ sResultado );
                     break;
@@ -113,9 +109,7 @@ public class ConexionBD implements Runnable {
                     //--
 
                     while (rs.next()) {
-
                         arrayResultados.add(rs.getString(1));
-
                     }
 
                     break;
@@ -190,6 +184,7 @@ public class ConexionBD implements Runnable {
 
                     break;
 
+
                 case "selectFotos":
 
                    listaImagenes = new ArrayList <Foto>();
@@ -216,7 +211,17 @@ public class ConexionBD implements Runnable {
                     }
 
                     break;
-
+                case "top":
+                        st = con.prepareStatement(sentencia);
+                        rs = st.executeQuery();
+                        int i = 0;
+                        top = new String[5][2];
+                    while (rs.next()) {
+                        top[i][0] = rs.getString("Nombre");
+                        top[i][1] = String.valueOf(rs.getInt("top"));
+                        i++;
+                    }
+                    break;
             }
 
         } catch (ClassNotFoundException e) {
@@ -308,6 +313,11 @@ public class ConexionBD implements Runnable {
 
     public void setListaImagenes(ArrayList<Foto> listaImagenes) {
         this.listaImagenes = listaImagenes;
+    }
+
+    public String[][] devolverTop()
+    {
+        return top;
     }
 }
 

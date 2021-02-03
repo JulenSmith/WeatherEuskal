@@ -19,9 +19,11 @@
         android:id="@+id/imageViewFoto"
         android:layout_width="410dp"
         android:layout_height="563dp"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/imagen_no_cargada" />
 
     <Button
         android:id="@+id/botonSubir"

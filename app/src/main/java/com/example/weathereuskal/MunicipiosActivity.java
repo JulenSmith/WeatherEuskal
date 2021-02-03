@@ -6,10 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ImageView;
 
 import com.example.weathereuskal.Conexion.ConexionBD;
 import com.example.weathereuskal.Objetos.EspacioNatural;
@@ -25,6 +24,7 @@ public class MunicipiosActivity extends AppCompatActivity {
     private Button botonBizkaia;
     private Button botonGipuzkoa;
     private Button botonAraba;
+    private ImageView imagenFondo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +37,11 @@ public class MunicipiosActivity extends AppCompatActivity {
         botonBizkaia = this.findViewById(R.id.botonBizkaia);
         botonGipuzkoa = this.findViewById(R.id.botonGipuzkoa);
         botonAraba = this.findViewById(R.id.botonAraba);
+        imagenFondo = this.findViewById(R.id.imageViewFondo);
 
         if (getIntent().getExtras().getString("botonOrigen").equals("municipios")){
+
+            imagenFondo.setImageResource(R.drawable.pueblo_fondo);
 
             ConexionBD clientThread = new ConexionBD();
             clientThread.setConsulta("selectArrayMunicipios");
@@ -85,6 +88,8 @@ public class MunicipiosActivity extends AppCompatActivity {
 
         } else if (getIntent().getExtras().getString("botonOrigen").equals("espacios")){
 
+            imagenFondo.setImageResource(R.drawable.espacio_fondo);
+
             ConexionBD clientThread = new ConexionBD();
             clientThread.setConsulta("selectArrayEspacios");
             clientThread.setSentencia("SELECT * from entornos order by Nombre");
@@ -116,7 +121,7 @@ public class MunicipiosActivity extends AppCompatActivity {
                     Intent municipio = new Intent(MunicipiosActivity.this, DetallesLugarActivity.class);
 
                     Bundle extras = new Bundle();
-                    extras.putString("botonOrigen", "entornos");
+                    extras.putString("botonOrigen", getIntent().getExtras().getString("botonOrigen"));
                     extras.putString("nombreUsuario", getIntent().getExtras().getString("nombreUsuario"));
                     extras.putString("nombre", listaEspacios.get(recycler.getChildAdapterPosition(v)).getNombre());
                     extras.putString("descripcion", listaEspacios.get(recycler.getChildAdapterPosition(v)).getDescripcion());

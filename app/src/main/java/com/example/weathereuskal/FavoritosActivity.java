@@ -65,5 +65,7 @@ public class FavoritosActivity extends AppCompatActivity {
         recyclerMuni.setLayoutManager(new LinearLayoutManager(this));
         recyclerEspa.setAdapter(adapterEspa);
         recyclerEspa.setLayoutManager(new LinearLayoutManager(this));
+
+
     }
 }
