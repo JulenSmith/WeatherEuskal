@@ -6,44 +6,68 @@
     android:layout_height="match_parent"
     tools:context="com.example.weathereuskal.Registrarse">
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="450dp"
+        android:layout_height="1400dp"
+        android:layout_marginStart="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.703"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.547"
+        app:srcCompat="@drawable/register" />
+
     <EditText
         android:id="@+id/campoUsuarioR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="259dp"
+        android:layout_height="57dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="88dp"
         android:layout_marginEnd="100dp"
+        android:background="@drawable/boton_ovalo"
+        android:backgroundTint="#EFEAEA"
         android:ems="10"
         android:hint="Usuario"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.418"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/campoContrasenaR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="259dp"
+        android:layout_height="57dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="100dp"
+        android:background="@drawable/boton_ovalo"
+        android:backgroundTint="#F3ECEC"
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/campoUsuarioR" />
 
     <EditText
         android:id="@+id/campoRepetirContrasenaR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="259dp"
+        android:layout_height="57dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="73dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="100dp"
+        android:background="@drawable/boton_ovalo"
+        android:backgroundTint="#F1EFEF"
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/campoContrasenaR" />
@@ -60,7 +84,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/campoRepetirContrasenaR"
-        app:layout_constraintVertical_bias="0.323"
+        app:layout_constraintVertical_bias="0.526"
         app:strokeColor="#C51E1E" />
 
     <Button
@@ -76,5 +100,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/botonRegistrarseR"
-        app:layout_constraintVertical_bias="0.352" />
+        app:layout_constraintVertical_bias="0.675" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

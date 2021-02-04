@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/black_overlay"
+    android:backgroundTintMode="add"
     tools:context=".MenuPrincipal">
 
     <ImageView
@@ -24,6 +26,7 @@
         android:id="@+id/botonEspaciosNaturales"
         android:layout_width="135dp"
         android:layout_height="70dp"
+        android:background="@drawable/boton_ovalo"
         android:text="Espacios Naturales"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -32,6 +35,7 @@
         android:id="@+id/botonMunicipios"
         android:layout_width="135dp"
         android:layout_height="70dp"
+        android:background="@drawable/boton_ovalo"
         android:text="Municipios"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -40,6 +44,7 @@
         android:id="@+id/botonTop"
         android:layout_width="135dp"
         android:layout_height="70dp"
+        android:background="@drawable/boton_ovalo"
         android:text="Top"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/botonMunicipios"
@@ -47,25 +52,32 @@
 
     <Button
         android:id="@+id/botonFotos"
-        android:layout_width="135dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="100dp"
+        android:layout_width="63dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#00FFFFFF"
         android:onClick="onClick"
-        android:text="Fotos"
+        app:icon="@android:drawable/ic_menu_camera"
+        app:iconTint="#070404"
         app:layout_constraintBottom_toTopOf="@+id/botonMunicipios"
         app:layout_constraintEnd_toEndOf="@+id/botonMunicipios"
+        app:layout_constraintHorizontal_bias="0.986"
         app:layout_constraintStart_toStartOf="@+id/botonMunicipios" />
 
     <Button
         android:id="@+id/botonFavoritos"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="69dp"
+        android:layout_height="58dp"
+        android:backgroundTint="#00E8DCDC"
         android:onClick="onClick"
-        android:text="Favoritos"
+        app:icon="@android:drawable/btn_star_big_on"
+        app:iconTint="#F6AC03"
         app:layout_constraintBottom_toBottomOf="@+id/botonFotos"
         app:layout_constraintEnd_toEndOf="@+id/botonEspaciosNaturales"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/botonEspaciosNaturales"
-        app:layout_constraintTop_toTopOf="@+id/botonFotos" />
+        app:layout_constraintTop_toTopOf="@+id/botonFotos"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textViewBienvenida"

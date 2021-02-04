@@ -64,11 +64,12 @@ public class ConexionBD implements Runnable {
             //Aqui pondriamos la IP y puerto.
             //"192.168.56.1"
 //            "192.168.7.227"
-            sIP = "192.168.56.1";
+            //192.168.0.11 Julen ip
+            sIP = "192.168.0.11";
             sPuerto = "3306";
             sBBDD = "euskalmet";
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
-            con = DriverManager.getConnection( url, "root", "");
+            con = DriverManager.getConnection(url,"root", "");
 
             switch(consulta) {
                 case "select":

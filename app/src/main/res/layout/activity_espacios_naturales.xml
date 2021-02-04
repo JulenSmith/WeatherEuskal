@@ -10,6 +10,7 @@
         android:id="@+id/botonVizcaya"
         android:layout_width="135dp"
         android:layout_height="70dp"
+        android:background="@drawable/boton_ovalo"
         android:text="Vizcaya"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -18,6 +19,7 @@
         android:id="@+id/botonGuipuzkoa"
         android:layout_width="135dp"
         android:layout_height="70dp"
+        android:background="@drawable/boton_ovalo"
         android:text="Guipuzkoa"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/botonAraba"
@@ -27,6 +29,7 @@
         android:id="@+id/botonAraba"
         android:layout_width="135dp"
         android:layout_height="70dp"
+        android:background="@drawable/boton_ovalo"
         android:text="araba"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
